@@ -1,0 +1,1 @@
+"# Szakdoga"  initgit addgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/Kecske36/Szakdoga.gitgit push -u origin main
