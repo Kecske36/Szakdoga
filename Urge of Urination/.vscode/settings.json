@@ -56,5 +56,11 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Urge of Urination.sln"
+    "dotnet.defaultSolution": "Urge of Urination.sln",
+    "cSpell.words": [
+        "Behaviour",
+        "Mathf",
+        "Rigidbody",
+        "Rotaion"
+    ]
 }
