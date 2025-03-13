@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,10 +20,13 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+    bool sprintInput;
 
     Vector3 moveDirection;
 
     Rigidbody rb;
+    public GameObject pauseMenu;
+    public GameObject car;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -36,8 +41,6 @@ public class PlayerMovement : MonoBehaviour
         //Ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        MyInput();
-
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -46,10 +49,20 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = 0;
         }
+
+        MyInput();
+        PauseMenu();
     }
 
     private void FixedUpdate()
     {
+        // if(OnCollisionEnter()
+        // {
+            
+        // })
+        // {
+
+        // }
         MovePlayer();
     }
 
@@ -57,12 +70,46 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        sprintInput = Input.GetAxis("Sprint") > 0;
+    }
+
+    // bool OnCollisionEnter()
+    // {
+    //     bool inCar = false;
+    //     if (Input.GetKeyDown(KeyCode.E) && !inCar)
+    //     {
+    //         transform.position = car.transform.position;
+    //         inCar = true;
+    //         return true;
+    //     }
+    //     else if (Input.GetKeyDown(KeyCode.E) && inCar)
+    //     {
+    //         inCar = false;
+    //         return false;
+    //     }
+    //     return false;
+    // }
+
+    private void PauseMenu () {
+        if(Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed* 10f, ForceMode.Force);
+        rb.AddForce(sprintInput?
+            moveDirection.normalized * moveSpeed * 20f:
+            moveDirection.normalized * moveSpeed * 10f,
+            ForceMode.Force);
     }
 }

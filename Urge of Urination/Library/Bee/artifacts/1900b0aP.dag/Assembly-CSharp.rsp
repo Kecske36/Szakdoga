@@ -308,6 +308,9 @@
 -analyzer:"N:/Unity/2022.3.55f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"N:/Unity/2022.3.55f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/MoveCamera.cs"
+"Assets/Scripts/PlayerCam.cs"
+"Assets/Scripts/PlayerMovement.cs"
 -langversion:9.0
 /deterministic
 /optimize+
