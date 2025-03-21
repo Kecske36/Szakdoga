@@ -122,6 +122,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &32999049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32999050}
+  m_Layer: 0
+  m_Name: DriverSeat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32999050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32999049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.143, y: 0.865, z: -0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 768701749}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55410608
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +928,8 @@ GameObject:
   - component: {fileID: 372318434}
   - component: {fileID: 372318433}
   - component: {fileID: 372318432}
+  - component: {fileID: 372318435}
+  - component: {fileID: 372318436}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -954,6 +987,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372318435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372318431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8358af4a156de74896b716d02d9227c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1393991907}
+--- !u!114 &372318436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372318431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02bbf06a0b15484093df56ec865ca06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1999612464}
+  car: {fileID: 768701748}
+  enterExitKey: 101
+  carDriverSeat: {fileID: 32999050}
+  carCollider: {fileID: 0}
+  playerCollider: {fileID: 0}
 --- !u!1 &451734416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,6 +1706,7 @@ GameObject:
   - component: {fileID: 768701749}
   - component: {fileID: 768701751}
   - component: {fileID: 768701750}
+  - component: {fileID: 768701752}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -1667,6 +1732,7 @@ Transform:
   - {fileID: 1718481651}
   - {fileID: 463397384}
   - {fileID: 1051830149}
+  - {fileID: 32999050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &768701750
@@ -1717,6 +1783,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &768701752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768701748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbca6d5b9bc70b48b414f46e5a69a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rotationSpeed: 100
 --- !u!1 &826520793
 GameObject:
   m_ObjectHideFlags: 0
@@ -4121,6 +4201,7 @@ MonoBehaviour:
   orientation: {fileID: 1323910504}
   pauseMenu: {fileID: 1393991907}
   car: {fileID: 768701748}
+  carCollider: {fileID: 0}
 --- !u!1 &2016775048
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,7 +4360,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

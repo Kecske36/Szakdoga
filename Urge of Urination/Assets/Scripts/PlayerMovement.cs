@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public GameObject pauseMenu;
     public GameObject car;
+    public Collider carCollider;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -56,13 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // if(OnCollisionEnter()
-        // {
-            
-        // })
-        // {
-
-        // }
         MovePlayer();
     }
 
@@ -73,22 +67,13 @@ public class PlayerMovement : MonoBehaviour
         sprintInput = Input.GetAxis("Sprint") > 0;
     }
 
-    // bool OnCollisionEnter()
-    // {
-    //     bool inCar = false;
-    //     if (Input.GetKeyDown(KeyCode.E) && !inCar)
-    //     {
-    //         transform.position = car.transform.position;
-    //         inCar = true;
-    //         return true;
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.E) && inCar)
-    //     {
-    //         inCar = false;
-    //         return false;
-    //     }
-    //     return false;
-    // }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Car"))
+        {
+            Debug.Log("Autó");
+        }
+    }
 
     private void PauseMenu () {
         if(Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf)
