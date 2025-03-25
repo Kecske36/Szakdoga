@@ -10,6 +10,8 @@ public class EnterExitCar : MonoBehaviour
     public Collider playerCollider;
 
     private bool isInCar = false;
+    MoveCamera moveCam = new MoveCamera();
+    PlayerCam playerCam = new PlayerCam();
 
     void Update()
     {
@@ -21,8 +23,12 @@ public class EnterExitCar : MonoBehaviour
             }
             else if (Vector3.Distance(player.transform.position, car.transform.position) < 3.0f)
             {
+                Debug.Log("autó");
                 EnterCar();
             }
+            moveCam.Update();
+            playerCam.Start();
+            playerCam.Update();
         }
     }
 

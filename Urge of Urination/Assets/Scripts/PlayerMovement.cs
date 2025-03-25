@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
-    bool sprintInput;
+    public bool sprintInput;
 
     Vector3 moveDirection;
 
@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject car;
     public Collider carCollider;
+    public bool walk;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        
     }
 
     private void MyInput()
@@ -65,13 +67,14 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         sprintInput = Input.GetAxis("Sprint") > 0;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Car"))
+        
+        if(!sprintInput && horizontalInput != 0 || verticalInput != 0)
         {
-            Debug.Log("Autó");
+            walk = true;
+        }
+        else
+        {
+            walk = false;
         }
     }
 
