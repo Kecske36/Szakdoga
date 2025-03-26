@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject car;
     public Collider carCollider;
-    public bool walk;
+    public static bool walk;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         {
             walk = true;
         }
-        else
+        else if(horizontalInput == 0 || verticalInput == 0)
         {
             walk = false;
         }
