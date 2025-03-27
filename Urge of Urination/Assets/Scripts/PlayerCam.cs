@@ -6,7 +6,7 @@ public class PlayerCam : MonoBehaviour
 {
     public float sensX;
     public float sensY;
-    public Transform orientation;
+    public static Transform orientation;
 
     float xRotation;
     float yRotation;

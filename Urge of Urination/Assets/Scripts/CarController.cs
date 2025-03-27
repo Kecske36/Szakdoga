@@ -7,10 +7,13 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        float move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+        if(EnterExitCar.isInCar)
+        {
+            float move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+            float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
 
-        transform.Translate(0, 0, move);
-        transform.Rotate(0, rotation, 0);
+            transform.Translate(0, 0, move);
+            transform.Rotate(0, rotation, 0);   
+        }
     }
 }

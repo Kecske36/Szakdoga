@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnterExitCar : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class EnterExitCar : MonoBehaviour
     public Collider carCollider;
     public Collider playerCollider;
 
-    private bool isInCar = false;
+    public static bool isInCar = false;
     MoveCamera moveCam = new MoveCamera();
     PlayerCam playerCam = new PlayerCam();
 
@@ -23,7 +24,6 @@ public class EnterExitCar : MonoBehaviour
             }
             else if (Vector3.Distance(player.transform.position, car.transform.position) < 3.0f)
             {
-                Debug.Log("autó");
                 EnterCar();
             }
             moveCam.Update();
