@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26620746a93b2246b156d21d99bef4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1016636071}
 --- !u!114 &168266465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2927,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 168266463}
-  sprintInput: 0
   pauseMenu: {fileID: 1393991907}
 --- !u!54 &1016636071
 Rigidbody:
