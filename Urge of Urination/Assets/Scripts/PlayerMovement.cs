@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     public GameObject pauseMenu;
-    public GameObject car;
-    public Collider carCollider;
     public static bool walk;
     #endregion
     // Start is called before the first frame update
@@ -99,5 +97,6 @@ public class PlayerMovement : MonoBehaviour
             moveDirection.normalized * moveSpeed * 20f:
             moveDirection.normalized * moveSpeed * 10f,
             ForceMode.Force);
+        rb.maxLinearVelocity = sprintInput? 15 : 10;
     }
 }
