@@ -1040,11 +1040,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02bbf06a0b15484093df56ec865ca06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  car: {fileID: 0}
+  player: {fileID: 1016636069}
+  car: {fileID: 586347487}
+  MainCamera: {fileID: 1898618418}
   enterExitKey: 101
-  carDriverSeat: {fileID: 0}
-  carCollider: {fileID: 0}
+  carDriverSeat: {fileID: 1668797229}
+  carCollider: {fileID: 586347489}
   playerCollider: {fileID: 0}
 --- !u!114 &372318437
 MonoBehaviour:
