@@ -17,46 +17,21 @@ public class animationStateController : MonoBehaviour
     void FixedUpdate()
     {
         if(PlayerMovement.sprintInput){
-            animator.SetBool("isRunning", true);
+            animator.SetBool("isRunning", true); //ha a Shift gomb lenyomásra kerül, fut
         }
 
         if(!PlayerMovement.sprintInput){
-            animator.SetBool("isRunning", false);
+            animator.SetBool("isRunning", false); //ha a Shift gombot felengedi, a felhasznló sétál
         }
 
         if(PlayerMovement.walk){
             animator.SetBool("isWalking", true);
+        //ha a mozgásra funkcionális gombok lenyomásra kerülnek, sétál
         }
 
         if(!PlayerMovement.walk){
             animator.SetBool("isWalking", false);
+            //ha a mozgásra funkcionális gombok felengedésre kerülnek, megáll
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                animator.SetBool("isRunning", false);
-                animator.SetBool("isWalking", true);
-            }
-        
-        /*
-        if (Math.Abs(rb.velocity.magnitude) > 0.5)
-        {
-            if (Math.Abs(rb.velocity.magnitude) >= 10 || Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                animator.SetBool("isRunning", true);
-                //animator.SetBool("isWalking",false);
-            }
-            else if (Math.Abs(rb.velocity.magnitude) < 10 || !Input.GetKeyDown(KeyCode.LeftShift)) {
-                animator.SetBool("isRunning", false);
-                animator.CrossFade("isWalking", 0.5f);
-                animator.SetBool("isWalking", true);
-            }
-        }
-        else {
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isRunning", false);
-        
-
-        }
-        */
     }
 }
