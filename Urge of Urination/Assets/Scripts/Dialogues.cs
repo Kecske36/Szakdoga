@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class Dialogues : MonoBehaviour
 {
-    public Dictionary<string, Texts> dialogues;
+    public Dictionary<string, Texts> dialogues = new Dictionary<string, Texts>();
     public  Text Name;
     public Text Text;
     public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
-        dialogues.Add("ugat", new Texts("Kutya", "vau"));
+        dialogues.Add("ugat", new Texts("Kutya", "vau vau vau vau vau vau vau vau vau vau vau vau vau vau"));
         dialogues.Add("nyavog", new Texts("macska", "miau"));
         // StreamReader sr = new StreamReader("szovegek.txt");
         // while(sr.Peek() != -1)
@@ -26,9 +26,16 @@ public class Dialogues : MonoBehaviour
     public void OnTriggerEnter(Collider other) {
         panel.SetActive(true);
         Name.text = dialogues[name].Name;
-        foreach(var item in dialogues[name].Text)
+        StartCoroutine(TypeText(dialogues[name].Text));
+    }
+
+    IEnumerator TypeText(string message)
+    {
+        Text.text = "";
+        foreach (char c in message)
         {
-            Text.text += item;
+            Text.text += c;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

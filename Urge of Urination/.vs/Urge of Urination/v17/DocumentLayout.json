@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\EnterExitCar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\EnterExitCar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\animationStateController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\animationStateController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -30,6 +34,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EnterExitCar.cs",
+              "DocumentMoniker": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\EnterExitCar.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\EnterExitCar.cs",
+              "ToolTip": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\EnterExitCar.cs",
+              "RelativeToolTip": "Assets\\Scripts\\EnterExitCar.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T11:51:09.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "animationStateController.cs",
               "DocumentMoniker": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\animationStateController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\animationStateController.cs",
@@ -42,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\Scripts\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerMovement.cs",
@@ -50,12 +67,11 @@
               "RelativeToolTip": "Assets\\Scripts\\PlayerMovement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-24T13:43:47.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-24T13:43:47.288Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TMP_Bitmap-Mobile.shader",
               "DocumentMoniker": "C:\\Szakdoga\\Szakdoga\\Urge of Urination\\Assets\\TextMesh Pro\\Shaders\\TMP_Bitmap-Mobile.shader",
               "RelativeDocumentMoniker": "Assets\\TextMesh Pro\\Shaders\\TMP_Bitmap-Mobile.shader",
@@ -67,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "StartGame.cs",
               "DocumentMoniker": "N:\\Unitys projektek\\Urge of Urination\\Assets\\Scripts\\StartGame.cs",
               "ToolTip": "N:\\Unitys projektek\\Urge of Urination\\Assets\\Scripts\\StartGame.cs",
