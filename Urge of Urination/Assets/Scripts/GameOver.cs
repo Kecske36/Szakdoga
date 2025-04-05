@@ -1,29 +1,41 @@
 using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
-using UnityEngine.UI;
 using UnityEngine;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
     public Image image;
-    [SerializeField] private float fadeDuration = 2.0f; // Másodperc
-    public void Start()
+    public Text text;
+    public float fadeSpeed = 0.05f;
+    public float fadeDelay = 0.05f;
+
+    void Start()
     {
-        image = GameObject.Find("Game Over Screen").GetComponent<Image>();
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        StartCoroutine(GameOverScreen());
+        // Kezdetben láthatatlan
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+        text.text = $"{Dialogues.dialogues["nyavog"].Name}\n{Dialogues.dialogues["nyavog"].Text}";
     }
 
-    IEnumerator GameOverScreen()
+    void OnTriggerEnter(Collider other)
     {
-        while (image.color.a != 1)
+        StartCoroutine(FadeInShit());
+    }
+
+    IEnumerator FadeInShit()
+    {
+        // Képernyő fade
+        while (image.color.a < 1)
         {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + 0.09f);
-            yield return new WaitForSeconds(0.2f);
+            image.color += new Color(0, 0, 0, fadeSpeed);
+            yield return new WaitForSeconds(fadeDelay);
+        }
+
+        // Szöveg fade
+        while (text.color.a < 1)
+        {
+            text.color += new Color(0, 0, 0, fadeSpeed);
+            yield return new WaitForSeconds(fadeDelay);
         }
     }
 }

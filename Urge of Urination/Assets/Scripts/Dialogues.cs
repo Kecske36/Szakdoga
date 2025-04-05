@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Dialogues : MonoBehaviour
 {
-    public Dictionary<string, Texts> dialogues = new Dictionary<string, Texts>();
+    static public Dictionary<string, Texts> dialogues = new Dictionary<string, Texts>();
     public  Text Name;
     public Text Text;
     public GameObject panel;
