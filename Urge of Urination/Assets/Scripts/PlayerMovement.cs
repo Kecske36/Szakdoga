@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public GameObject pauseMenu;
     public static bool walk;
+    public AudioSource footstep;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -70,10 +71,12 @@ public class PlayerMovement : MonoBehaviour
         if(!sprintInput && horizontalInput != 0 || verticalInput != 0)
         {
             walk = true;
+            footstep.enabled = true;
         }
         else if(horizontalInput == 0 || verticalInput == 0)
         {
             walk = false;
+            footstep.enabled = false;
         }
     }
 

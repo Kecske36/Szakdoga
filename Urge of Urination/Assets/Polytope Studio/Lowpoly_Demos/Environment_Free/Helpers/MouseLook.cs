@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+/*public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
 
@@ -25,4 +25,4 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * mouseX);
     }
-}
+}*/
