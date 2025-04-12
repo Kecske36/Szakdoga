@@ -1,49 +1,97 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    #region Variables
-    [Header("Movement")]
-    public float moveSpeed;
-
-    public float groundDrag;
-
-    [Header("Ground Check")]
+    public Animator animator;
+    public Rigidbody targetRigidbody;
+    public Camera playerCam;
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
-    public Transform orientation;
+    public float gravity = -9.81f;
+    public float moveSpeed; // max move speed
+    public float sprintSpeed; // max sprint speed
+    public float currentSpeed;
+    public float groundDrag;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
-    float horizontalInput;
-    float verticalInput;
-    public static bool sprintInput;
 
-    Vector3 moveDirection;
+    private Rigidbody rb;
+    //private CharacterController characterController;
 
-    Rigidbody rb;
-    public GameObject pauseMenu;
-    public static bool walk;
-    public AudioSource footstep;
-    #endregion
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        playerCam = GetComponentInChildren<Camera>();
+        currentSpeed = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        //Ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+       /* characterController = GetComponent<CharacterController>();
 
-        if (grounded)
+        if (characterController == null)
+        {
+            Debug.LogError("CharacterController component not found on this GameObject. Please attach one.", this);
+            enabled = false;
+        }*/
+    }
+
+    void FixedUpdate()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Debug.Log($"X: {x}\tZ: {z}");
+        Vector3 inputDirection = new Vector3(x, 0, z);
+        inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
+        //= Input.GetKeyDown(sprintKey) ? moveSpeed : sprintSpeed;
+        if (x != 0 || z != 0)
+        {           
+            if (Input.GetKey(sprintKey))
+            {
+                currentSpeed = sprintSpeed;                
+            }
+            else
+            {
+                currentSpeed = moveSpeed;                
+            }
+        }
+
+
+        if (currentSpeed > 0)
+        {
+            animator.SetBool("isWalking", true);
+            if (currentSpeed > 10)
+            {
+                animator.SetBool("isRunning", true);
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+        Vector3 moveDirection = transform.TransformDirection(inputDirection);
+        Vector3 horintalVelocity = moveDirection * currentSpeed;
+        //characterController.Move(moveDirection * Time.deltaTime);
+        rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
+        GravityHandle();
+
+        
+    }
+
+    void GravityHandle()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround))
         {
             rb.drag = groundDrag;
         }
@@ -51,56 +99,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = 0;
         }
-
-        MyInput();
-        PauseMenu();
     }
 
-    private void FixedUpdate()
+    void LookAround(Vector3 pos)
     {
-        MovePlayer();
-        
-    }
-
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        sprintInput = Input.GetAxis("Sprint") > 0;
-        
-        if(!sprintInput && horizontalInput != 0 || verticalInput != 0)
-        {
-            walk = true;
-            footstep.enabled = true;
-        }
-        else if(horizontalInput == 0 || verticalInput == 0)
-        {
-            walk = false;
-            footstep.enabled = false;
-        }
-    }
-
-    private void PauseMenu () {
-        if(Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf)
-        {
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf)
-        {
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1;
-        }
-    }
-
-    private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(sprintInput?
-            moveDirection.normalized * moveSpeed * 20f:
-            moveDirection.normalized * moveSpeed * 10f,
-            ForceMode.Force);
-        rb.maxLinearVelocity = sprintInput? 15 : 10;
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 direction = mousePosWorld - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 }

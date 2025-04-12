@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class EnterExitCar : MonoBehaviour
 {
     public GameObject player;
+    public GameObject character;
     public GameObject car;
-    public GameObject MainCamera;
     public KeyCode enterExitKey = KeyCode.E;
     public Transform carDriverSeat;
     public Collider carCollider;
@@ -14,6 +15,7 @@ public class EnterExitCar : MonoBehaviour
     public static bool isInCar = false;
     MoveCamera moveCam = new MoveCamera();
     PlayerCam playerCam = new PlayerCam();
+    public GameObject camera;
 
     void Update()
     {
@@ -27,16 +29,14 @@ public class EnterExitCar : MonoBehaviour
             {
                 EnterCar();
             }
+            moveCam.Update();
+            playerCam.Start();
+            playerCam.Update();
         }
-        moveCam.Update();
-        playerCam.Start();
-        playerCam.Update();
     }
 
     void EnterCar()
     {
-        player.transform.rotation = car.transform.rotation;
-        MainCamera.transform.rotation = player.transform.rotation;
         isInCar = true;
         player.SetActive(false);
         player.transform.position = carDriverSeat.position;
@@ -50,5 +50,12 @@ public class EnterExitCar : MonoBehaviour
         player.SetActive(true);
         player.transform.parent = null;
         car.GetComponent<CarController>().enabled = false;
+
+        camera.transform.rotation = new Quaternion(Math.Abs(player.transform.rotation.x), player.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
+    }
+
+    void setCam(Camera playerCam)
+    {
+
     }
 }
