@@ -10,22 +10,22 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public Rigidbody targetRigidbody;
     public Camera playerCam;
+    public static byte fov;
     public float playerHeight;
     public LayerMask whatIsGround;
     public float gravity = -9.81f;
-    public float moveSpeed; // max sebesség
-    public float sprintSpeed; // max futás sebesség
+    public float moveSpeed; // max sebessï¿½g
+    public float sprintSpeed; // max futï¿½s sebessï¿½g
     public float currentSpeed;
     public float groundDrag;
     public KeyCode sprintKey = KeyCode.LeftShift;
-
-
     private Rigidbody rb;
     //private CharacterController characterController;
 
     
     void Start()
     {
+        playerCam.fieldOfView = fov < 30? 90 : fov > 90? 90 : fov;
         rb = GetComponent<Rigidbody>();
         playerCam = GetComponentInChildren<Camera>();
         currentSpeed = 0;
@@ -44,55 +44,57 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        Debug.Log($"X: {x}\tZ: {z}");
-        Vector3 inputDirection = new Vector3(x, 0, z);
-        inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
-        //= Input.GetKeyDown(sprintKey) ? moveSpeed : sprintSpeed;
-        if (x != 0 || z != 0)
-        {           
-            if (Input.GetKey(sprintKey))
+        if (!EventSystem.pauseMenuActive)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            Debug.Log($"X: {x}\tZ: {z}");
+            Vector3 inputDirection = new Vector3(x, 0, z);
+            inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
+            //= Input.GetKeyDown(sprintKey) ? moveSpeed : sprintSpeed;
+            currentSpeed = 0;
+            if (x != 0 || z != 0)
+            {           
+                if (Input.GetKey(sprintKey))
+                {
+                    currentSpeed = sprintSpeed;                
+                }
+                else
+                {
+                    currentSpeed = moveSpeed;                
+                }
+            }
+
+
+            if (currentSpeed > 0)
             {
-                currentSpeed = sprintSpeed;                
+                /*Ha az aktuï¿½lis sebessï¿½g nagyobb mint 0 akkor
+                aktivï¿½lï¿½dik a sï¿½ta vagy futï¿½s gyorsasï¿½gtï¿½l fï¿½ggï¿½en*/
+
+                animator.SetBool("isWalking", true); //alapï¿½rtelmezett sï¿½ta
+                if (currentSpeed > 10)
+                {
+                    /*10nï¿½l nagyobb sebessï¿½g esetï¿½n futï¿½s aktivï¿½lï¿½dï¿½sa*/
+                    animator.SetBool("isRunning", true);
+                }
+                else
+                {
+                    /*10nï¿½l kisebb sebessï¿½g esetï¿½n sï¿½ta aktivï¿½lï¿½dï¿½sa*/
+                    animator.SetBool("isRunning", false);
+                }
             }
             else
             {
-                currentSpeed = moveSpeed;                
+                //0 ï¿½rtï¿½kï¿½ sebessï¿½g esetï¿½n ï¿½llï¿½s animï¿½ciï¿½ 
+                animator.SetBool("isWalking", false);
             }
+
+            Vector3 moveDirection = transform.TransformDirection(inputDirection);
+            Vector3 horintalVelocity = moveDirection * currentSpeed;
+            //characterController.Move(moveDirection * Time.deltaTime);
+            rb.MovePosition(transform.position + horintalVelocity * Time.deltaTime);
+            GravityHandle();
         }
-
-
-        if (currentSpeed > 0)
-        {
-            /*Ha az aktuális sebesség nagyobb mint 0 akkor
-            aktiválódik a séta vagy futás gyorsaságtól függõen*/
-
-            animator.SetBool("isWalking", true); //alapértelmezett séta
-            if (currentSpeed > 10)
-            {
-                /*10nél nagyobb sebesség esetén futás aktiválódása*/
-                animator.SetBool("isRunning", true);
-            }
-            else
-            {
-                /*10nél kisebb sebesség esetén séta aktiválódása*/
-                animator.SetBool("isRunning", false);
-            }
-        }
-        else
-        {
-            //0 értékû sebesség esetén állás animáció 
-            animator.SetBool("isWalking", false);
-        }
-
-        Vector3 moveDirection = transform.TransformDirection(inputDirection);
-        Vector3 horintalVelocity = moveDirection * currentSpeed;
-        //characterController.Move(moveDirection * Time.deltaTime);
-        rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
-        GravityHandle();
-
-        
     }
 
     void GravityHandle()

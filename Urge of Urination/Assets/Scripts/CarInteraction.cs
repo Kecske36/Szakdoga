@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 [RequireComponent(typeof(CarController))] // Ensure CarController is present
 [RequireComponent(typeof(Collider))]     // Ensure a Collider is present for the trigger
@@ -20,6 +22,7 @@ public class CarInteraction : MonoBehaviour
     // Private variables
     public CarController carController;
     public PlayerInteraction playerInteraction; // Reference to player's interaction script
+    public static bool isPlayerInsideStatic = false;
     public bool isPlayerInside = false;
     public bool playerNearby = false;
 
@@ -59,12 +62,15 @@ public class CarInteraction : MonoBehaviour
         {
             if (isPlayerInside)
             {
+                isPlayerInside = false;
+                isPlayerInsideStatic = false;
                 ExitCar();
             }
             // Only allow entering if player is nearby AND not already inside
             else if (!isPlayerInside && playerNearby)
             {
                 isPlayerInside = true;
+                isPlayerInsideStatic = true;
                 EnterCar();
             }
         }
@@ -116,6 +122,7 @@ public class CarInteraction : MonoBehaviour
 
         Debug.Log("Entering Car");
         isPlayerInside = true;
+        isPlayerInsideStatic = true;
         playerNearby = false; // Player is no longer "nearby", they are "inside"
 
         // Disable Player

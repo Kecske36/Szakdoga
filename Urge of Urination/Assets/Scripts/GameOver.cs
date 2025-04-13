@@ -14,7 +14,7 @@ public class GameOver : MonoBehaviour
         // Kezdetben láthatatlan
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-        text.text = $"{Dialogues.dialogues["nyavog"].Name}\n{Dialogues.dialogues["nyavog"].Text}";
+        text.text = $"{Dialogues.dialogues[name][0].Name}\n{Dialogues.dialogues[name][0].Text}";
     }
 
     void OnTriggerEnter(Collider other)
