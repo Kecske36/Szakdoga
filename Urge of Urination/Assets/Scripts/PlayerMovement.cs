@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight;
     public LayerMask whatIsGround;
     public float gravity = -9.81f;
-    public float moveSpeed; // max move speed
-    public float sprintSpeed; // max sprint speed
+    public float moveSpeed; // max sebesség
+    public float sprintSpeed; // max futás sebesség
     public float currentSpeed;
     public float groundDrag;
     public KeyCode sprintKey = KeyCode.LeftShift;
@@ -65,18 +65,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentSpeed > 0)
         {
-            animator.SetBool("isWalking", true);
+            /*Ha az aktuális sebesség nagyobb mint 0 akkor
+            aktiválódik a séta vagy futás gyorsaságtól függõen*/
+
+            animator.SetBool("isWalking", true); //alapértelmezett séta
             if (currentSpeed > 10)
             {
+                /*10nél nagyobb sebesség esetén futás aktiválódása*/
                 animator.SetBool("isRunning", true);
             }
             else
             {
+                /*10nél kisebb sebesség esetén séta aktiválódása*/
                 animator.SetBool("isRunning", false);
             }
         }
         else
         {
+            //0 értékû sebesség esetén állás animáció 
             animator.SetBool("isWalking", false);
         }
 
