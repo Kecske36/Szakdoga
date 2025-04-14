@@ -1,15 +1,6 @@
-office;John Doe;Jó napot uram!
-office;Boss;Áh, gyere csak be.
-office;John Doe;Csak szólni akartam előre hogy egy hónap múlva elmegyek nyaralni, és arra kivenném a szabadnapjaimat.
-office;John Doe;…és lenne még valami. Baj lenne esetleg ha hazamennék sajnos otthon maradtak a gyógyszereim és kellemetlenül érzem magam.
-office;Boss;Óh, teljesen rendben van. Sokat dolgoztál, ráadásul minőségi munkát is végeztél, úgyhogy megérdemled. Egyébként is jön egy újonc, ő addig átveszi a helyed.
-office;Boss;De azért morcos vagyok hogy haza kell menned, siess vissza kérlek, szigorúan kell vennem a munkám.
-office;John Doe;Pompás, akkor majd a pontos dátumot átküldöm. És elnézést a kellemetlenséget.
-office;Boss;Na, akkor megbeszéltük.
-office;John Doe;Viszlát uram!
-office;Boss;Viszlát!
-forest;John Doe;Ez meg mi volt?
-forest;John Doe;Remek, defektet kaptam!
-forest;John Doe;Ahh... Amúgyis pisilnem kellett.
-forest; John Doe;És most mit tegyek? Hmm... Itt egy túraösvény, hátha találok segítséget.
-branching;John Doe;Sehol egy tábla?... szuper. Akkor próbára kell tennem a szerencsém. Bal vagy jobb?
+Office;John Doe;Jó napot uram!
+Forest;John Doe;Ez meg mi volt?
+Forest;John Doe;Remek, defektet kaptam!
+Forest;John Doe;Ahh... Amúgyis pisilnem kellett.
+Forest; John Doe;És most mit tegyek? Hmm... Itt egy túraösvény, hátha találok segítséget.
+Branching;John Doe;Sehol egy tábla?... szuper. Akkor próbára kell tennem a szerencsém. Bal vagy jobbB

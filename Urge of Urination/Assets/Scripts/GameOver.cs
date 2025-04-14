@@ -1,14 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class GameOver : MonoBehaviour
 {
     public Image image;
     public Text text;
     public float fadeSpeed = 0.05f;
     public float fadeDelay = 0.05f;
-
+    public 
     void Start()
     {
         // Kezdetben láthatatlan
@@ -16,12 +15,10 @@ public class GameOver : MonoBehaviour
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
         text.text = $"{Dialogues.dialogues[name][0].Name}\n{Dialogues.dialogues[name][0].Text}";
     }
-
     void OnTriggerEnter(Collider other)
     {
         StartCoroutine(FadeInShit());
     }
-
     IEnumerator FadeInShit()
     {
         // Képernyő fade
@@ -37,5 +34,9 @@ public class GameOver : MonoBehaviour
             text.color += new Color(0, 0, 0, fadeSpeed);
             yield return new WaitForSeconds(fadeDelay);
         }
+    }
+    void BackToMainMenu()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 }

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class Texts : MonoBehaviour
+[Serializable]
+public class Texts
 {
-    public string Name {get; private set;}
-    public string Text {get; private set;}
+    public string Name { get; private set; }
+    public string Text { get; private set; }
+    
     public Texts(string name, string text)
     {
         Name = name;
