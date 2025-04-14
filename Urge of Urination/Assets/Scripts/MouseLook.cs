@@ -55,7 +55,7 @@ public class MouseLook : MonoBehaviour
 
     public void ReSync()
     {
-        this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         playerBody.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 }

@@ -57,11 +57,11 @@ public class CarMovement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        Debug.Log($"X: {x}\tZ: {z}");
+//        Debug.Log($"X: {x}\tZ: {z}");
         Vector3 inputDirection = new Vector3(0, 0, z);
         inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
         //= Input.GetKeyDown(sprintKey) ? moveSpeed : sprintSpeed;
-        currentSpeed = z != 0 ? 100 : 0;
+        currentSpeed = z != 0 ? 60 : 0;
 
         Vector3 moveDirection = transform.TransformDirection(inputDirection);
         Vector3 horintalVelocity = moveDirection * currentSpeed;

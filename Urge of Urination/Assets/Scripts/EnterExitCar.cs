@@ -15,7 +15,7 @@ public class EnterExitCar : MonoBehaviour
     public static bool isInCar = false;
     MoveCamera moveCam = new MoveCamera();
     PlayerCam playerCam = new PlayerCam();
-    public GameObject camera;
+    public new GameObject camera;
 
     void Update()
     {
@@ -52,10 +52,5 @@ public class EnterExitCar : MonoBehaviour
         car.GetComponent<CarController>().enabled = false;
 
         camera.transform.rotation = new Quaternion(Math.Abs(player.transform.rotation.x), player.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
-    }
-
-    void setCam(Camera playerCam)
-    {
-
     }
 }

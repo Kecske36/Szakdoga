@@ -1,7 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Purchasing;
+using UnityEngine.UI;
 using UnityEngine;
+using System;
+
 
 public class EventSystem : MonoBehaviour
 {

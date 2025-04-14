@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
-            Debug.Log($"X: {x}\tZ: {z}");
+//            Debug.Log($"X: {x}\tZ: {z}");
             Vector3 inputDirection = new Vector3(x, 0, z);
             inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
             //= Input.GetKeyDown(sprintKey) ? moveSpeed : sprintSpeed;

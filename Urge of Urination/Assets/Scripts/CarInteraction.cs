@@ -17,18 +17,24 @@ public class CarInteraction : MonoBehaviour
     public Camera carCamera;
     [Tooltip("The point where the player should appear when exiting. Assign in Inspector.")]
     public Transform exitPoint; // Use the 'exitPoint' GameObject from CarController
-
+    public static Transform exitPointStatic;
     public GameObject playerObject; // Reference to the player when nearby
+    public static GameObject playerObjectStatic;
     // Private variables
     public CarController carController;
     public PlayerInteraction playerInteraction; // Reference to player's interaction script
+    public static PlayerInteraction playerInteractionStatic;
     public static bool isPlayerInsideStatic = false;
     public bool isPlayerInside = false;
     public bool playerNearby = false;
-
+    public static bool playerNearbyStatic = false;
+    static bool exitcar;
     void Start()
     {
         //playerObject = GameObject.FindWithTag(playerTag);
+        exitPointStatic = exitPoint;
+        playerObjectStatic = playerObject;
+        playerInteractionStatic = playerInteraction;
     }
 
     void Awake()
@@ -49,25 +55,32 @@ public class CarInteraction : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"isPlayerInside: {isPlayerInside}\n" +
-            $"playerNearby: {playerNearby}\n"+
-            $"playerObject: {playerObject.name}");
+//        Debug.Log(exitcar);
+        if(exitcar)
+        {
+            playerInteraction = playerInteractionStatic.GetComponent<PlayerInteraction>();
+            SetCarControl(false);
+            carCamera.gameObject.SetActive(false);
+        }
+//        Debug.Log($"isPlayerInside: {isPlayerInside}\n" +
+//            $"playerNearby: {playerNearby}\n"+
+//            $"playerObject: {playerObject.name}");
         // Check for interaction key press
         if (Vector3.Distance(this.transform.position, playerObject.transform.position) < 4.0f)
+        {
+
             playerNearby = true;
+            playerNearbyStatic = true;
+        }
         else
+        {
             playerNearby = false;
-        Debug.Log(Vector3.Distance(transform.position, playerObject.transform.position));
+            playerNearbyStatic = false;
+        }
+//        Debug.Log(Vector3.Distance(transform.position, playerObject.transform.position));
         if (Input.GetKeyDown(interactionKey))
         {
-            if (isPlayerInside)
-            {
-                isPlayerInside = false;
-                isPlayerInsideStatic = false;
-                ExitCar();
-            }
-            // Only allow entering if player is nearby AND not already inside
-            else if (!isPlayerInside && playerNearby)
+            if (!isPlayerInside && playerNearby)
             {
                 isPlayerInside = true;
                 isPlayerInsideStatic = true;
@@ -120,73 +133,45 @@ public class CarInteraction : MonoBehaviour
             return; 
         } // Should not happen if logic is correct, but safety check
 
-        Debug.Log("Entering Car");
-        isPlayerInside = true;
-        isPlayerInsideStatic = true;
-        playerNearby = false; // Player is no longer "nearby", they are "inside"
+        if(playerNearbyStatic)
+        {
+            Debug.Log("Entering Car");
+            isPlayerInside = true;
+            isPlayerInsideStatic = true;
+            playerNearby = false; // Player is no longer "nearby", they are "inside"
 
-        // Disable Player
-        playerInteraction.SetPlayerControl(false);
-        playerObject.SetActive(false); // Also deactivate the whole player object
+            // Disable Player
+            playerInteraction.SetPlayerControl(false);
+            playerObject.SetActive(false); // Also deactivate the whole player object
 
-        // Enable Car
-        SetCarControl(true);
+            // Enable Car
+            SetCarControl(true);
 
-        // Clear references (we'll find player again on exit if needed, or keep if preferred)
-        // playerObject = null;
-        // playerInteraction = null;
+            // Clear references (we'll find player again on exit if needed, or keep if preferred)
+            // playerObject = null;
+            // playerInteraction = null;
+        }
     }
 
-    void ExitCar()
+    public static void ExitCar()
     {
-        if (playerInteraction == null || playerObject == null)
-        {
-            Debug.LogError("Trying to exit car, but player reference is missing!");
-            // Attempt recovery if possible (e.g., find player by tag)
-            // This situation ideally shouldn't occur with the current logic.
-            // For now, just return to prevent further errors.
-            return;
-        }
 
         Debug.Log("Exiting Car");
-        isPlayerInside = false;
-
-        // Disable Car
-        SetCarControl(false);
+        isPlayerInsideStatic = false;
 
         // Enable Player
         // Position player first, then activate/enable components
-        if (exitPoint != null)
+        if (exitPointStatic != null)
         {
-            playerObject.transform.position = exitPoint.position;
-            playerObject.transform.rotation = exitPoint.rotation;
-        }
-        else
-        {
-            Debug.LogWarning("Exit point not set on CarInteraction! Player will appear at car's origin.", this);
-            playerObject.transform.position = transform.position;
-            playerObject.transform.rotation = transform.rotation;
+            playerObjectStatic.transform.position = exitPointStatic.position;
+            playerObjectStatic.transform.rotation = exitPointStatic.rotation;
         }
 
-        playerObject.SetActive(true); // Reactivate the player object first
-        playerInteraction.SetPlayerControl(true); // Then enable controls
+        playerObjectStatic.SetActive(true); // Reactivate the player object first
+        playerInteractionStatic.SetPlayerControl(true); // Then enable controls
 
-        // Check if player is still in trigger zone after exiting
-        // This requires the trigger collider to check its bounds manually or wait for next OnTriggerStay
-        // For simplicity, we assume player might still be nearby if exitPoint is within trigger
-        Collider col = GetComponent<Collider>();
-        if (col.bounds.Contains(playerObject.transform.position))
-        {
-            playerNearby = true;
-            Debug.Log("Player exited, press " + interactionKey + " to enter again.");
-        }
-        else
-        {
-            playerNearby = false; // Player exited outside the trigger zone
-            playerObject = null;
-            playerInteraction = null;
-        }
-        playerObject.GetComponentInChildren<Camera>().GetComponent<MouseLook>().ReSync();
+        playerObjectStatic.GetComponentInChildren<Camera>().GetComponent<MouseLook>().ReSync();
+        exitcar = true;
     }
 
     // Helper to enable/disable car components

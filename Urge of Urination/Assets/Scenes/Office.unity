@@ -364,8 +364,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.7595215, y: -16.582184}
-  m_SizeDelta: {x: 1147.732, y: 133.026}
+  m_AnchoredPosition: {x: -0.3103, y: -16.582184}
+  m_SizeDelta: {x: 1660.0886, y: 133.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98688422
 MonoBehaviour:
@@ -498,7 +498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -461.58057, y: 85.578}
+  m_AnchoredPosition: {x: -714.11, y: 85.578}
   m_SizeDelta: {x: 232.4911, y: 47.154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134723709
@@ -1312,7 +1312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &398337412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2239,7 +2239,6 @@ MonoBehaviour:
   Name: {fileID: 134723709}
   Text: {fileID: 98688422}
   panel: {fileID: 398337411}
-  image: {fileID: 146187087}
 --- !u!65 &1523991683
 BoxCollider:
   m_ObjectHideFlags: 0

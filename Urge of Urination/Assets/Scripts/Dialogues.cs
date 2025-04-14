@@ -1,80 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class Dialogues : MonoBehaviour
 {
     static public Dictionary<string, List<Texts>> dialogues = new Dictionary<string, List<Texts>>();
+    
+    // Non-static UI elemek (Inspector-ban beállítandó)
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Text;
     public GameObject panel;
-    public Image image;
+    
+    // Static referenciák
+    private static TextMeshProUGUI _nameStatic;
+    private static TextMeshProUGUI _textStatic;
+    private static GameObject _panelStatic;
+    private static MonoBehaviour _monoBehaviourInstance;
 
     void Start()
     {
+        // Static referenciák inicializálása
+        _nameStatic = Name;
+        _textStatic = Text;
+        _panelStatic = panel;
+        _monoBehaviourInstance = this;
+        
         // Beolvasás
         StreamReader sr = new StreamReader("szovegek.txt");
         while(sr.Peek() != -1)
         {
             string[] line = sr.ReadLine().Split(';');
-            if(!dialogues.ContainsKey(line[0]))
+            string key = line[0].Trim();
+            if(!dialogues.ContainsKey(key))
             {
-                dialogues.Add(line[0], new List<Texts>{ new Texts(line[1], line[2]) });
+                dialogues.Add(key, new List<Texts>());
             }
-            else
-            {
-                dialogues[line[0]].Add(new Texts(line[1], line[2]));
-            }
+            dialogues[key].Add(new Texts(line[1].Trim(), line[2].Trim()));
         }
         sr.Close();
         
-        Debug.Log("beolvasás kész");
-        panel.SetActive(true);
-        
-        // Minden művelet egymás után, egy coroutine-ban
-        StartCoroutine(StartSequence());
-    }        
-
-    IEnumerator StartSequence()
-    {
-        // 1. Dialógus megjelenítése
-        yield return StartCoroutine(ShowDialogue());
-        
-        // 2. Várakozás a dialógus után
-        yield return new WaitForSeconds(2f);
-    
-        
-        // 3. Scene betöltése
-        SceneManager.LoadSceneAsync("Game");
+        Debug.Log("Beolvasás kész");
     }
 
-    IEnumerator ShowDialogue()
+    static public void TriggerDialogue(string triggerName)
     {
-        Debug.Log("Név megjelenítése");
-        if (dialogues.ContainsKey(name))
+        if(_monoBehaviourInstance != null)
         {
-            foreach (var dialog in dialogues[name])
-            {
-                Name.text = dialog.Name;
-                yield return StartCoroutine(TypeText(dialog.Text));
-                yield return new WaitForSeconds(0.3f);
-            }
+            _monoBehaviourInstance.StartCoroutine(ShowDialogueCoroutine(triggerName));
         }
-        panel.SetActive(false);
+        else
+        {
+            Debug.LogError("Dialogues instance not initialized!");
+        }
     }
 
-    IEnumerator TypeText(string message)
+    static private IEnumerator ShowDialogueCoroutine(string triggerName)
     {
-        Debug.Log("Szöveg megjelenítése");
-        Text.text = "";
-        foreach (char c in message)
+        if(!dialogues.ContainsKey(triggerName))
         {
-            Text.text += c;
-            yield return new WaitForSeconds(0.1f);
+            Debug.LogWarning($"No dialogue found for trigger: {triggerName}");
+            yield break;
+        }
+
+        _panelStatic.SetActive(true);
+        
+        foreach(var dialog in dialogues[triggerName])
+        {
+            _nameStatic.text = dialog.Name;
+            yield return TypeTextCoroutine(dialog.Text);
+            yield return new WaitForSeconds(0.3f);
+        }
+        
+        _panelStatic.SetActive(false);
+    }
+
+    static private IEnumerator TypeTextCoroutine(string message)
+    {
+        _textStatic.text = "";
+        foreach(char c in message)
+        {
+            _textStatic.text += c;
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }
