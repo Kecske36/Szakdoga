@@ -1,0 +1,20 @@
+Office;John Doe;Jó napot uram!
+Office;Boss;Áh, gyere csak be.
+Office;John Doe;Csak szólni akartam előre hogy egy hónap múlva elmegyek nyaralni, és arra kivenném a szabadnapjaimat.
+Office;John Doe;…és lenne még valami. Baj lenne esetleg ha hazamennék sajnos otthon maradtak a gyógyszereim és kellemetlenül érzem magam.
+Office;Boss;Óh, teljesen rendben van. Sokat dolgoztál, ráadásul minőségi munkát is végeztél, úgyhogy megérdemled. Egyébként is jön egy újonc, ő addig átveszi a helyed.
+Office;Boss;De azért morcos vagyok hogy haza kell menned, siess vissza kérlek, szigorúan kell vennem a munkám.
+Office;John Doe;Pompás, akkor majd a pontos dátumot átküldöm. És elnézést a kellemetlenséget.
+Office;Boss;Na, akkor megbeszéltük.
+Office;John Doe;Viszlát uram!
+Office;Boss;Viszlát!
+TireBlowout;John Doe;Ez meg mi volt?
+TireBlowout;John Doe;Remek, defektet kaptam!
+TireBlowout;John Doe;Ahh... Amúgyis pisilnem kellett.
+TireBlowout; John Doe;És most mit tegyek? Hmm... Itt egy túraösvény, hátha találok segítséget.
+Branching;John Doe;Sehol egy tábla?... szuper. Akkor próbára kell tennem a szerencsém. Bal vagy jobb?
+SmallHouse;Jhon Doe;Elnézést van itt valaki... Úgy tűnik itt nincs senki.
+GameOver_SpareWheel;John Doe;Nahát, olyan régóta itt van, hogy el is feledkeztem róla.
+GameOver_Mobile;John Doe;Egy pillanat... még reggel itt hagytam a telefonom! Hála az égnek, igy feltudom hívni az a vontatós ismerősömet.
+GameOver_LostInTheForest;John Doe;Jaj ne eltévedtem, most hogy fogok hazamenni?
+GameOver_ForestHouse;John Doe;Köszönöm a pótkereket, *kicseréli a pótkereket*
